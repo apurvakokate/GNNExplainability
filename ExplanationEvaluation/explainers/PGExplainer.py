@@ -148,7 +148,7 @@ class PGExplainer(BaseExplainer):
         torch.save(self.explainer_model.state_dict(), "./explainer_model/model"+str(seed)+".pt")
 
 
-    def load_model(self):
+    def load_model(self,seed):
         self.explainer_model.load_state_dict(torch.load("./explainer_model/model"+str(seed)+".pt"))
 
 
@@ -170,7 +170,7 @@ class PGExplainer(BaseExplainer):
 
         if os.path.exists("./explainer_model/model"+str(seed)+".pt"):
             print("skipping training and using saved model")
-            self.load_model()
+            self.load_model(seed)
         else:
             self.train(indices=indices, seed=seed)
             self.save_model(seed)

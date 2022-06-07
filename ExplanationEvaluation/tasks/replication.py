@@ -10,7 +10,7 @@ from ExplanationEvaluation.datasets.dataset_loaders import load_dataset
 from ExplanationEvaluation.datasets.ground_truth_loaders import load_dataset_ground_truth
 from ExplanationEvaluation.evaluation.AUCEvaluation import AUCEvaluation
 from ExplanationEvaluation.evaluation.EfficiencyEvaluation import EfficiencyEvluation
-from ExplanationEvaluation.explainers.GNNExplainer import GNNExplainer
+#from ExplanationEvaluation.explainers.GNNExplainer import GNNExplainer
 from ExplanationEvaluation.explainers.PGExplainer import PGExplainer
 from ExplanationEvaluation.models.model_selector import model_selector
 from ExplanationEvaluation.utils.plotting import plot, save_connectivity_graph
@@ -57,8 +57,8 @@ def select_explainer(explainer, model, graphs, features, task, folder, epochs, l
     """
     if explainer == "PG":
         return PGExplainer(model, graphs, features, task, folder, epochs=epochs, lr=lr, reg_coefs=reg_coefs, temp=temp, sample_bias=sample_bias)
-    elif explainer == "GNN":
-        return GNNExplainer(model, graphs, features, task, epochs=epochs, lr=lr, reg_coefs=reg_coefs)
+ #   elif explainer == "GNN":
+ #       return GNNExplainer(model, graphs, features, task, epochs=epochs, lr=lr, reg_coefs=reg_coefs)
     else:
         raise NotImplementedError("Unknown explainer type")
 

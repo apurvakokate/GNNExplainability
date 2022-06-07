@@ -149,7 +149,7 @@ class PGExplainer(BaseExplainer):
 
 
     def load_model(self):
-        self.explainer_model.load_state_dict(torch.load("./explainer_model/model.pt"))
+        self.explainer_model.load_state_dict(torch.load("./explainer_model/model"+str(seed)+".pt"))
 
 
 

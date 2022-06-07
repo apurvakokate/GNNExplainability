@@ -28,6 +28,8 @@ def string_to_model(paper, dataset):
             return GNN_GraphGCN(14, 2)
         else:
             raise NotImplementedError
+    else:
+        raise NotImplementedError
 """  
     elif paper == "PG":
         if dataset in ['syn1']:
@@ -45,8 +47,6 @@ def string_to_model(paper, dataset):
         else:
             raise NotImplementedError
  """
-    else:
-        raise NotImplementedError
 
 
 def get_pretrained_path(paper, dataset):

@@ -3,8 +3,8 @@ import os
 
 from ExplanationEvaluation.models.GNN_paper import NodeGCN as GNN_NodeGCN
 from ExplanationEvaluation.models.GNN_paper import GraphGCN as GNN_GraphGCN
-from ExplanationEvaluation.models.PG_paper import NodeGCN as PG_NodeGCN
-from ExplanationEvaluation.models.PG_paper import GraphGCN as PG_GraphGCN
+#from ExplanationEvaluation.models.PG_paper import NodeGCN as PG_NodeGCN
+#from ExplanationEvaluation.models.PG_paper import GraphGCN as PG_GraphGCN
 
 def string_to_model(paper, dataset):
     """
@@ -28,6 +28,7 @@ def string_to_model(paper, dataset):
             return GNN_GraphGCN(14, 2)
         else:
             raise NotImplementedError
+"""  
     elif paper == "PG":
         if dataset in ['syn1']:
             return PG_NodeGCN(10, 4)
@@ -43,6 +44,7 @@ def string_to_model(paper, dataset):
             return PG_GraphGCN(14, 2)
         else:
             raise NotImplementedError
+ """
     else:
         raise NotImplementedError
 
@@ -69,9 +71,9 @@ def model_selector(paper, dataset, pretrained=True, return_checkpoint=False):
     :returns: torch.nn.module models and optionallly a dict containing it's parameters.
     """
     model = string_to_model(paper, dataset)
-    #checkpoint = torch.load("./checkpoints/GNN/ba2/best_model")
+    checkpoint = torch.load("./checkpoints/GNN/ba2/best_model")
     #checkpoint = torch.load("./checkpoints/GNN/mutag/best_model")
-    #model.load_state_dict(checkpoint['model_state_dict'])
+    model.load_state_dict(checkpoint['model_state_dict'])
     if pretrained:
         path = get_pretrained_path(paper, dataset)
         checkpoint = torch.load(path)
@@ -79,4 +81,4 @@ def model_selector(paper, dataset, pretrained=True, return_checkpoint=False):
         print(f"This model obtained: Train Acc: {checkpoint['train_acc']:.4f}, Val Acc: {checkpoint['val_acc']:.4f}, Test Acc: {checkpoint['test_acc']:.4f}.")
         if return_checkpoint:
             return model, checkpoint
-    return model#, checkpoint
+    return model, checkpoint
